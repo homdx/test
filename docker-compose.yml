@@ -1,0 +1,24 @@
+version: '2'
+services:
+
+  proxybroker:
+    build:
+      context: ./ProxyBroker
+      dockerfile: Dockerfile
+    volumes:
+      - 'proxydata:/app/output'
+#https://github.com/constverum/ProxyBroker
+
+  proxyprivoxy:
+    build:
+      context: ./privoxy
+      dockerfile: Dockerfile
+    volumes:
+      - 'proxydata:/etc/privoxy'
+      - './share:/1'
+    ports:
+      - "8118:8118"
+
+volumes:
+  proxydata:
+
